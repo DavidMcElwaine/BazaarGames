@@ -13,13 +13,23 @@ public class Transaction{
 			while(in.hasNext()){
 				String currentLine = in.nextLine();
 				String[] temp = currentLine.split(",");
-				if((username).matches(temp[0])) updatedLibrary = updatedLibrary + currentLine + ", " + game + "\n" ;
+				if((username).matches(temp[0])) updatedLibrary = updatedLibrary + currentLine + "," + game + "\n" ;
 				else updatedLibrary = updatedLibrary + currentLine + "\n";
 			}
 			
 			writer.write(updatedLibrary);
 			writer.flush();
 			writer.close();
-			writer.close();
 		}	
+		
+		public void CalculateBill(String username, ArrayList<Game> newGames){
+			
+			double initialPrice = 0;
+			for(Game game: newGames){
+				intialPrice += game.price;
+			}
+			
+			
+			
+		}
 }
