@@ -13,7 +13,7 @@ public class Transaction{
 			while(in.hasNext()){
 				String currentLine = in.nextLine();
 				String[] temp = currentLine.split(",");
-				if((username).matches(temp[0])) updatedLibrary = updatedLibrary + currentLine + game + "\n" ;
+				if((username).matches(temp[0])) updatedLibrary = updatedLibrary + currentLine + "," + game + "\n" ;
 				else updatedLibrary = updatedLibrary + currentLine + "\n";
 			}
 			
