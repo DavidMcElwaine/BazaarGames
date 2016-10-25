@@ -6,8 +6,8 @@ public class User{
 	private int reviews;
 	private int friends;
 	private int spendings;
-	public ArrayList<String> userlist	= new ArrayList<String>();
-	public ArrayList<String> library = new ArrayList<String>(); ;
+	private ArrayList<String> userlist	= new ArrayList<String>();
+	private ArrayList<String> library = new ArrayList<String>(); ;
 	String catagory;
 	
 	User(String username){
@@ -36,6 +36,16 @@ public class User{
 			
 		catagory = this.calculateC();
 	}
+	
+	ArrayList getUserList(){
+		ArrayList<String> uL = userlist;
+		return uL;
+	}
+	ArrayList getLibrary(){
+		ArrayList<String> ly = library;
+		return ly;
+	}
+	
 	
 	String calculateC(){
 		int total = reviews + friends + spendings;
