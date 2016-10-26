@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.io.File;
-import java.util.Date;
-import java.text.DateFormat;
+import java.util.Calendar;
 
 public class game{
 	private String title;
@@ -9,6 +8,7 @@ public class game{
 	private double price;
 	private String developer;
 	private int sales;
+	private Calendar date = Calendar.getInstance();
     
 	
 	game(String name) throws Exception{
@@ -18,6 +18,17 @@ public class game{
 		category = games.nextInt();
 		price = games.nextDouble();
 		sales = games.nextInt();
+		int day = games.nextInt();
+		int month = games.nextInt();
+		int year = games.nextInt();
+	    date.set(date.YEAR, year);
+        date.set(date.MONTH, month);
+        date.set(date.DAY_OF_MONTH, day);
+	}
+	String getDate(){
+		String dob = date.get(date.DAY_OF_MONTH) + "/" + date.get(date.MONTH) + "/" + date.get(date.YEAR);
+	
+		return dob;
 	}
 	
 	
