@@ -41,6 +41,9 @@ public class game{
 	double getPrice(){
 		return price;
 	}
+	void setPrice(double p){
+		price = p;
+	}
 	String getDeveloper(){
 		return developer;
 	}
