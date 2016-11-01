@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.util.Calendar;
 
-public class game{
+public class Game{
 	private String title;
 	private int category;
 	private double price;
@@ -11,7 +11,7 @@ public class game{
 	private Calendar date = Calendar.getInstance();
     
 	
-	game(String name) throws Exception{
+	Game(String name) throws Exception{
 		Scanner games = new Scanner(new File(name + ".txt"));
 		title = name;
 		developer = games.nextLine().toString();
