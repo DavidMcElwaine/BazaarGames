@@ -11,7 +11,7 @@ public class Game{
 	private Calendar date = Calendar.getInstance();
     
 	
-	Game(String name) throws Exception{
+	public Game(String name) throws Exception{
 		Scanner games = new Scanner(new File(name + ".txt"));
 		title = name;
 		developer = games.nextLine().toString();
