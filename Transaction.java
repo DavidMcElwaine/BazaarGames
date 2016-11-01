@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 public class Transaction{
 		
-		public void UpdateCustomer(String username, String game) throws Exception{
+		public void UpdateUserLibrary(String username, String game) throws Exception{
 			
 			File originalLibrary = new File("library.csv");
 			File newLibrary = new File("newLibrary.csv");
