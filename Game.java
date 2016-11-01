@@ -1,53 +1,42 @@
-import java.util.Scanner;
-import java.io.File;
-import java.util.Calendar;
-
 public class Game{
 	private String title;
-	private int category;
+	private String category;
 	private double price;
 	private String developer;
 	private int sales;
-	private Calendar date = Calendar.getInstance();
-    
+	private int year;
 	
-	public Game(String name) throws Exception{
-		Scanner games = new Scanner(new File(name + ".txt"));
-		title = name;
-		developer = games.nextLine().toString();
-		category = games.nextInt();
-		price = games.nextDouble();
-		sales = games.nextInt();
-		int day = games.nextInt();
-		int month = games.nextInt();
-		int year = games.nextInt();
-	    date.set(date.YEAR, year);
-        date.set(date.MONTH, month);
-        date.set(date.DAY_OF_MONTH, day);
-	}
-	String getDate(){
-		String dob = date.get(date.DAY_OF_MONTH) + "/" + date.get(date.MONTH) + "/" + date.get(date.YEAR);
 	
-		return dob;
+	public Game(String title, String category, double price, String developer, int sales, int year) throws Exception{
+		
+		this.title = title;
+		this.developer = developer;
+		this.category = category;
+		this.price = price;
+		this.sales = sales;
+		this.year = year;
 	}
 	
+	public int getYear(){
+		return year;
+	}
 	
-	String getTitle(){
+	public String getTitle(){
 		return title;
 	}
-	int getCategory(){
+	public String getCategory(){
 		return category;
 	}
-	double getPrice(){
+	public double getPrice(){
 		return price;
 	}
-	void setPrice(double p){
+	public void setPrice(double p){
 		price = p;
 	}
-	String getDeveloper(){
+	public String getDeveloper(){
 		return developer;
 	}
-	int getSales(){
+	public int getSales(){
 		return sales;
 	}
 	
