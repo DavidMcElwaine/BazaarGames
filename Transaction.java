@@ -22,14 +22,40 @@ public class Transaction{
 			writer.close();
 		}	
 		
-		public void CalculateBill(String username, ArrayList<Game> newGames){
+		public double CalculateBill(String username, ArrayList<Game> newGames){
 			
+			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+			double discountPercent = 0;
 			double initialPrice = 0;
+			double discountA = 0;
+			double originalCost = 0;
+			
 			for(Game game: newGames){
-				intialPrice += game.price;
+				
+				//add price to bill
+				originalCost += game.getPrice();
+				
+				//calculate discount based on age of game. 1% per year up to 50% off
+				int ageDifference = currentYear - game.getYear();
+				double ageDiscount = 1 - (ageDifference*0.01);
+				if(ageDiscount < 0.5) ageDiscount = 0.5;
+				
+				//calculate discount based on sales. 1% reduction in discount per 100 sales
+				double modifierB = 0.5;
+				double salesDiscount = modifierB + (0.0001*game.getSales());
+				
+				//first stage of discount is the average of age and sales discounts
+				discountA = (ageDiscount+salesDiscount)/2;				
 			}
 			
+			//add discount based on number of games this purchase
+			discountPercent += 0.01*(newGames.size());
+			if(discountPercent >= 0.15) discountPercent = 0.15;
 			
-			
+			//final bill
+			double finalDiscount = discountPercent + discountA;
+			double finalCost = originalCost * finalDiscount;	
+
+			return finalCost;
 		}
 }
