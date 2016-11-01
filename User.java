@@ -10,17 +10,17 @@ public class User{
 	private ArrayList<String> library = new ArrayList<String>(); ;
 	String catagory;
 	
-	User(String username){
-		id = username;
-		friends = 0;
-		reviews = 0;
-	    spendings = 0;
+	public User(String username){
+		this.id = username;
+		this.friends = 0;
+		this.reviews = 0;
+	    	this.spendings = 0;
 	}
-	User(String username, int r, int f,int s) throws Exception{
-		id = username;
-		reviews = r;
-		friends = f;
-		spendings = s;
+	public User(String username, int r, int f,int s) throws Exception{
+		this.id = username;
+		this.reviews = r;
+		this.friends = f;
+		this.spendings = s;
 		Scanner games = new Scanner(new File("games.txt"));
 		int i = 0;
 		while(games.hasNextLine()){
