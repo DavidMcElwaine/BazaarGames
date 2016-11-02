@@ -5,7 +5,7 @@ public class Game{
 	private boolean onlineSupport;
 	
 	
-	public Game(int numberOfPlayers, String developer, boolean onlineSupport) throws Exception{
+	public Game(int numberOfPlayers, String developer, boolean onlineSupport){
 		
 		this.NumberOfPlayers = numberOfPlayers;
 		this.developer = developer;
