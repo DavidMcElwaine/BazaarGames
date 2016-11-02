@@ -1,4 +1,4 @@
-public class Game{
+public class Game implements Product{
 	
 	private int numberOfPlayers;
 	private String developer;
@@ -56,5 +56,8 @@ public class Game{
 	
  	 public String getOnlineSupport(){
 		return onlineSupport;
+	}
+	
+	public buy(){
 	}
 }
