@@ -1,0 +1,26 @@
+public class Game{
+	
+	private int numberOfPlayers;
+	private String developer;
+	private boolean onlineSupport;
+	
+	
+	public Game(int numberOfPlayers, String developer, boolean onlineSupport) throws Exception{
+		
+		this.NumberOfPlayers = numberOfPlayers;
+		this.developer = developer;
+		this.onlineSupport = onlineSupport;
+	}
+	
+	public String getDeveloper(){
+		return developer;
+	}
+  
+  public String getNumberOfPlayers(){
+		return numberOfPLayers;
+	}
+	
+  public String getOnlineSupport(){
+		return onlineSupport;
+	}
+}
