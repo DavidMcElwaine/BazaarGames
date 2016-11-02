@@ -1,0 +1,5 @@
+public class ProductFactory{
+	public static Product getProduct(){ //update to take an argument to determine type
+	return new Game();//update to create movies when needed
+	}
+}
