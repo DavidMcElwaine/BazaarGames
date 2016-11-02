@@ -57,4 +57,7 @@ public class Movie{
 	public double getStudio(){
 		return studio;
 	}
+	
+	public void buy(){
+	}
 }
