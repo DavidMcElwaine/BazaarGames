@@ -17,7 +17,7 @@ public class Game implements Product{
 		this.sales = sales;
 		this.year = year;
 		this.genre = genre;
-		this.NumberOfPlayers = numberOfPlayers;
+		this.numberOfPlayers = numberOfPlayers;
 		this.developer = developer;
 		this.onlineSupport = onlineSupport;
 	}
