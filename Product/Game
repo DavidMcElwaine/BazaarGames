@@ -42,19 +42,15 @@ public class Game implements Product{
 		return sales;
 	}
 	
-	public double getYear(){
-		return year;
-	}
-	
 	public String getDeveloper(){
 		return developer;
 	}
   
-  	public String getNumberOfPlayers(){
+  	public int getNumberOfPlayers(){
 		return numberOfPLayers;
 	}
 	
- 	 public String getOnlineSupport(){
+ 	public boolean getOnlineSupport(){
 		return onlineSupport;
 	}
 	
