@@ -58,6 +58,6 @@ public class Game implements Product{
 		return onlineSupport;
 	}
 	
-	public buy(){
+	public void buy(){
 	}
 }
