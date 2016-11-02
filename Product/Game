@@ -47,13 +47,13 @@ public class Game implements Product{
 	}
   
   	public int getNumberOfPlayers(){
-		return numberOfPLayers;
+		return numberOfPlayers;
 	}
 	
  	public boolean getOnlineSupport(){
 		return onlineSupport;
 	}
 	
-	public void buy(){
+	public void buy(String username, String title){
 	}
 }
