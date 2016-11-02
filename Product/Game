@@ -4,23 +4,57 @@ public class Game{
 	private String developer;
 	private boolean onlineSupport;
 	
+	private String title;
+	private double price;
+	private int sales;
+	private int year;
+	private String genre;
 	
 	public Game(int numberOfPlayers, String developer, boolean onlineSupport){
 		
+		this.title = title;
+		this.price = price;
+		this.sales = sales;
+		this.year = year;
+		this.genre = genre;
 		this.NumberOfPlayers = numberOfPlayers;
 		this.developer = developer;
 		this.onlineSupport = onlineSupport;
+	}
+	
+	public int getYear(){
+		return year;
+	}
+	
+	public String getTitle(){
+		return title;
+	}
+	
+	public String getGenre(){
+		return genre;
+	}
+	
+	public double getPrice(){
+		return price;
+	}
+	
+	public double getSales(){
+		return sales;
+	}
+	
+	public double getYear(){
+		return year;
 	}
 	
 	public String getDeveloper(){
 		return developer;
 	}
   
-  public String getNumberOfPlayers(){
+  	public String getNumberOfPlayers(){
 		return numberOfPLayers;
 	}
 	
-  public String getOnlineSupport(){
+ 	 public String getOnlineSupport(){
 		return onlineSupport;
 	}
 }
