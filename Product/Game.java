@@ -10,7 +10,7 @@ public class Game implements Product{
 	private int year;
 	private String genre;
 	
-	public Game(int numberOfPlayers, String developer, boolean onlineSupport){
+	public Game(String title, double price, int sales, int year, String genre, int numberOfPlayers, String developer, boolean onlineSupport){
 		
 		this.title = title;
 		this.price = price;
