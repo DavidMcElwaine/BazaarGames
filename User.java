@@ -1,83 +1,45 @@
-import java.util.Scanner;
-import java.io.File;
 import java.util.ArrayList;
 public class User{
-	private String id;
-	private int reviews;
-	private int friends;
+	private String username;
+	private int numReviews;
+	private int numFriends;
 	private int spendings;
-	private ArrayList<String> userlist	= new ArrayList<String>();
-	private ArrayList<String> library = new ArrayList<String>(); ;
-	String catagory;
+	private ArrayList<String> library;
 	
 	public User(String username){
-		this.id = username;
-		this.friends = 0;
-		this.reviews = 0;
+		this.username = username;
+		this.numFriends = 0;
+		this.numReviews = 0;
 	    	this.spendings = 0;
+		this.library = new ArrayList<String>();
 	}
-	public User(String username, int r, int f,int s) throws Exception{
-		this.id = username;
-		this.reviews = r;
-		this.friends = f;
+	public User(String username, int r, int f,int s){
+		this.username = username;
+		this.numReviews = r;
+		this.numFriends = f;
 		this.spendings = s;
-		Scanner games = new Scanner(new File("games.txt"));
-		int i = 0;
-		while(games.hasNextLine()){
-			library.add(games.nextLine().toString());
-			i++;
-		}
-		Scanner users = new Scanner(new File("users.txt"));
-		i =0;
-		while(users.hasNextLine()){
-			userlist.add(users.nextLine().toString());
-			i++;
-		}
-			
-		catagory = this.calculateC();
-	}
-	
-	ArrayList getUserList(){
-		ArrayList<String> uL = userlist;
-		return uL;
-	}
-	ArrayList getLibrary(){
-		ArrayList<String> ly = library;
-		return ly;
 	}
 	
 	
-	String calculateC(){
-		int total = reviews + friends + spendings;
-		if(total < 100)
-			return "Bronze";
-		else if(total < 300)
-			return "Sliver";
-		else 
-			return "Gold";
+	ArrayList<String> getLibrary(){
+		return library;
 	}
-	String getId(){
-		return id;
+	
+	
+	String getName(){
+		return username;
 	}
-	void setId(String i){
-		id = i;
+
+	int getNumReviews(){
+		return numReviews;
 	}
-	int getR(){
-		return reviews;
+
+	int getNumFriends(){
+		return numFriends;
 	}
-	void setR(int r){
-		reviews = r;
-	}
-	int getF(){
-		return friends;
-	}
-	void setF(int f){
-		friends = f;
-	}
-	int getS(){
+
+	int getSpendings(){
 		return spendings;
 	}
-	void setS(int s){
-		spendings = s;
-	}
+
 }
