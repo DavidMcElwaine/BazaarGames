@@ -1,11 +1,17 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 public class Transaction{
-		
-		public void UpdateUserLibrary(String username, String game) throws Exception{
-			
+                private User user;
+		public Transaction(User user)
+                {
+                    this.user = user;
+                }
+		public void UpdateUserLibrary(String game) throws Exception{
+			String username = user.getName();
 			File originalLibrary = new File("library.csv");
-			File newLibrary = new File("library.csv");
+			File newLibrary = new File("newLibrary.csv");
 			Scanner in = new Scanner(originalLibrary);
 			FileWriter writer = new FileWriter(newLibrary);
 			String updatedLibrary = new String("");
@@ -22,8 +28,8 @@ public class Transaction{
 			writer.close();
 		}	
 		
-		public double CalculateBill(String username, ArrayList<Game> newGames){
-			
+		public double CalculateBill(ArrayList<Game> newGames){
+			String username = user.getName();
 			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 			double discountPercent = 0;
 			double initialPrice = 0;
