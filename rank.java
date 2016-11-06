@@ -25,25 +25,18 @@ public class Rank{
 	}
 		
 	public static double getSpendings(String username){
-		Scanner library;
 		double total = 0; //open the two files and declare your return int
 		try 
 		{
-			library = new Scanner(new File("library.txt"));
-			while(library.hasNext())
-			{ 
-				String lLine = library.nextLine(); 
-				String[] Lib = lLine.split(",");//splits the lines into String arrays
-				
-				if(Lib[0].matches(username))
-				{
-					for(int i = 1; i < Lib.length; i++){
+			Arraylist<String> library = username.getLibrary();
+			
+					for(int i = 0; i < library.size(); i++){
 						Scanner gameDetails = new Scanner(new File("games.txt"));
 						while(gameDetails.hasNext())
 						{
 							String gLine = gameDetails.nextLine();
 							String[] temp = gLine.split(",");
-							if(temp[0].matches(Lib[i]))
+							if(temp[0].matches(library.get(i));
 							{
 								double price = Double.parseDouble(temp[4]);
 								total = total + price;// adds the cost of each one up
@@ -63,3 +56,4 @@ public class Rank{
 		return total;
 	}
 }
+
