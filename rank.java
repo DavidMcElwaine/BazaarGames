@@ -13,7 +13,7 @@ public class rank{
 			rank = "Gold";
 		}
 		else if(rankpoints > 200){
-			rank = "Sliver";
+			rank = "Silver";
 		}
 		else rank = "Bronze";
 		
