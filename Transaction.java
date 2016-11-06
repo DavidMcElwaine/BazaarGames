@@ -5,7 +5,7 @@ public class Transaction{
 		public void UpdateUserLibrary(String username, String game) throws Exception{
 			
 			File originalLibrary = new File("library.csv");
-			File newLibrary = new File("newLibrary.csv");
+			File newLibrary = new File("library.csv");
 			Scanner in = new Scanner(originalLibrary);
 			FileWriter writer = new FileWriter(newLibrary);
 			String updatedLibrary = new String("");
