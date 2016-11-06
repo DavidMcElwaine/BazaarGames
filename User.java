@@ -1,64 +1,67 @@
+import java.io.*;
 import java.util.ArrayList;
-public class User{
-	private String username;
-	private int numReviews;
-	private int numFriends;
-	private int spendings;
-	private double balance;
-	private ArrayList<Product> library;
-	private Rank rank;
-	
-	public User(String username){
-		this.library = new ArrayList<String>();
-		this.username = username;
-		this.numFriends = 0;
-		this.numReviews = 0;
-	    this.spendings = 0;
-		this.balance = 0;
-		this.library = new ArrayList<String>();
-	}
-	public User(String username, int r, int f,int s, double b,ArrayList<String> library){
-		this.username = username;
-		this.numReviews = r;
-		this.numFriends = f;
-		this.spendings = s;
-		this.balance = b;
-		this.library = library;
-	}
-	
-		public static User getUser(String username, int r, int f,int s, double b){
-		ArrayList<String> library = LibraryCSVReader.getLibrary(username);
-		return new User(username,r,f,s,b,library);
+import java.util.Calendar;
+import java.util.Scanner;
+public class Transaction{
+                private User user;
+		public Transaction(User user)
+                {
+                    this.user = user;
+                }
+		public void UpdateUserLibrary(String game) throws Exception{
+			String username = user.getName();
+			File originalLibrary = new File("library.csv");
+			File newLibrary = new File("newLibrary.csv");
+			Scanner in = new Scanner(originalLibrary);
+			FileWriter writer = new FileWriter(newLibrary);
+			String updatedLibrary = new String("");
+			
+			while(in.hasNext()){
+				String currentLine = in.nextLine();
+				String[] temp = currentLine.split(",");
+				if((username).matches(temp[0])) updatedLibrary = updatedLibrary + currentLine + "," + game + "\n" ;
+				else updatedLibrary = updatedLibrary + currentLine + "\n";
+			}
+			
+			writer.write(updatedLibrary);
+			writer.flush();
+			writer.close();
+		}	
 		
-	}
-	
-	public static User getUser(String username){
-		//braryCSVReader.getLibrary(username);
-		return new User(username);
-		
-	}
-	
-	ArrayList<String> getLibrary(){
-		return library;
-	}
-	
-	
-	String getName(){
-		return username;
-	}
+		public double CalculateBill(ArrayList<Game> newGames){
+			String username = user.getName();
+			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+			double discountPercent = 0;
+			double initialPrice = 0;
+			double discountA = 0;
+			double originalCost = 0;
+			
+			for(Game game: newGames){
+				
+				//add price to bill
+				originalCost += game.getPrice();
+				
+				//calculate discount based on age of game. 1% per year up to 50% off
+				int ageDifference = currentYear - game.getYear();
+				double ageDiscount = 1 - (ageDifference*0.01);
+				if(ageDiscount < 0.5) ageDiscount = 0.5;
+				
+				//calculate discount based on sales. 1% reduction in discount per 100 sales
+				double modifierB = 0.5;
+				double salesDiscount = modifierB + (0.0001*game.getSales());
+				
+				//first stage of discount is the average of age and sales discounts
+				discountA = (ageDiscount+salesDiscount)/2;				
+			}
+			
+			//add discount based on number of games this purchase
+			discountPercent += 0.01*(newGames.size());
+			if(discountPercent >= 0.15) discountPercent = 0.15;
+			
+			//final bill
+			double finalDiscount = discountPercent + discountA;
+			double finalCost = originalCost * finalDiscount;	
 
-	int getNumReviews(){
-		return numReviews;
-	}
-
-	int getNumFriends(){
-		return numFriends;
-	}
-
-	int getSpendings(){
-		return spendings;
-	}
-
+			return finalCost;
+		}
 }
-
-
