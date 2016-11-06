@@ -9,11 +9,10 @@ public class User{
 	private Rank rank;
 	
 	public User(String username){
-		this.library = new ArrayList<String>();
 		this.username = username;
 		this.numFriends = 0;
 		this.numReviews = 0;
-	    this.spendings = 0;
+	        this.spendings = 0;
 		this.balance = 0;
 		this.library = new ArrayList<String>();
 	}
