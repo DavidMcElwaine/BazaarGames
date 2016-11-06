@@ -5,6 +5,7 @@ public class User{
 	private int numFriends;
 	private int spendings;
 	private ArrayList<String> library;
+	private Rank rank;
 	
 	public User(String username){
 		this.username = username;
