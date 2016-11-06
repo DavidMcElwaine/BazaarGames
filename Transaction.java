@@ -4,9 +4,11 @@ import java.util.Calendar;
 import java.util.Scanner;
 public class Transaction{
                 private User user;
-		public Transaction(User user)
+		private ArrayList<Product> additions;
+		public Transaction(User user, ArrayList<Product> additions)
                 {
                     this.user = user;
+		    this.additions = additions;
                 }
 		public void UpdateUserLibrary(String game) throws Exception{
 			String username = user.getName();
