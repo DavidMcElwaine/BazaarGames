@@ -1,6 +1,5 @@
 package bazaar;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,35 +9,31 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class CartPanel extends JPanel implements ActionListener {
-    private ArrayList<Game> gamesList;
+public class CartPanel extends Panel implements ActionListener {
+    private ArrayList<Product> cartList;
     final JPanel panel,buttonPanel;
     private ArrayList<JButton> buttons;
     private JButton button,buy,clear;
     private JScrollPane scroll;
-    public CartPanel(){    
-        //readInGames();
+    public CartPanel(Database database, ArrayList<Product> cartList, User loggedInUser){ 
+        this.loggedInUser = loggedInUser;
+        cartList = new ArrayList<>();
+        this.cartList = cartList;
+        System.out.print(cartList.size());
+        
         buttonPanel = new JPanel();
         panel = new JPanel();
-        gamesList = new ArrayList<Game>();
-        buttons = new ArrayList<JButton>();
+        buttons = new ArrayList<>();
         scroll = new JScrollPane(panel);
         buy = new JButton("Buy cart");
         clear = new JButton("Clear cart");
-        
-        gamesList.add(new Game("Premier Fantasy","Circle Onyx","Strategy","Circle Onyx",22.50));
-        gamesList.add(new Game("Battleplace: Fall of Warfare","DA","Action","Ice",37.50));
-        gamesList.add(new Game("Last day","Circle Onyx","Strategy","Circle Onyx",22.50));
-        gamesList.add(new Game("Curling Manager 2015","DA","Strategy","DA",22.50));
-        gamesList.add(new Game("Dustin the Turkey At the Black Sea Games 2016","Circle Onyx","Strategy","Circle Onyx",22.50));
-        
 
-        for (int i = 0; i < gamesList.size();i++)  {
-            button = new JButton(gamesList.get(i).getTitle());
+        for (int i = 0; i < cartList.size();i++)  {
+            button = new JButton(cartList.get(i).getTitle());
             button.setPreferredSize(new Dimension(550,100));
             buttons.add(i, button);
         }    
-        panel.setPreferredSize(new Dimension (575,100 * gamesList.size()));
+        panel.setPreferredSize(new Dimension (575,100 * cartList.size()));
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.setPreferredSize(new Dimension (600, 350));
         this.add(scroll);
@@ -58,7 +53,21 @@ public class CartPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent event)
     {
         Object source = event.getSource();
-        String text = ((JButton) event.getSource()).getText();
-        System.out.print(text);
+        for (int i =0; i < buttons.size();i++)
+        {
+            if(source == buttons.get(i))
+                System.out.print(i);
+        }
+        if(source == buy)
+        {
+            cartList = new ArrayList<>();
+            //transation class goes here
+            revalidate();
+        }
+        if(source == clear)
+        {
+            cartList = new ArrayList<>();
+            revalidate();
+        }
     }
 }
