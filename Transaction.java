@@ -10,7 +10,7 @@ public class Transaction{
                     this.user = user;
 		    this.additions = additions;
                 }
-		public void UpdateUserLibrary(String game) throws Exception{
+		public void UpdateUserLibrary(Transaction trans) throws Exception{
 			String username = user.getName();
 			File originalLibrary = new File("library.csv");
 			File newLibrary = new File("newLibrary.csv");
