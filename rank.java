@@ -47,9 +47,9 @@ public class Rank{
 	}
 	
 	public double getDiscount(){
-		if(this.rank.matches("Gold") return 0.8;
-		else if(this.rank.matches("Silver") return 0.9;
-		else return 1.0;
+		if(this.rank.matches("Gold") return 0.2;
+		else if(this.rank.matches("Silver") return 0.1;
+		else return 0;
 	}
 }
 
