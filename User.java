@@ -75,6 +75,10 @@ public class User{
         double getBalance(){
            return balance; 
         }
+	
+	ArrayList<Product> getCart(){
+		return cart;
+	}
 }
 
 
