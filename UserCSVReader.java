@@ -4,15 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserCSVReader {
-	
-	
-	public static void main(String[] args) throws Exception{
-		String[] result = getUserDetails("user123");
-		for(int i = 0; i< 5; i++){
-			System.out.println(result[i]);
-		}
-	}
-    
     
   public static String[] getUserDetails(String username) throws FileNotFoundException{
   String[] result = new String[5];
