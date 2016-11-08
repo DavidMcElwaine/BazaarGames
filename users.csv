@@ -1,4 +1,4 @@
-user123,0,1,100
-gameGuy99,0,1,250
-NoGameGuy,0,2,0
-ExampleUser,0,1,1000
+user123,0,1,100,12.50
+gameGuy99,0,1,250,200
+NoGameGuy,0,2,0,0.01
+ExampleUser,0,1,1000,25.50
