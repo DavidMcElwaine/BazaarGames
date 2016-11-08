@@ -45,5 +45,9 @@ public class Rank{
 		}
 		return total;
 	}
+	
+	public String getRank(){
+		return this.rank;
+	}
 }
 
