@@ -39,7 +39,7 @@ public class User{
 	
 		public static User getUser(String username, int r, int f,int s, double b) throws FileNotFoundException{
 		ArrayList<Product> library = LibraryCSVReader.getLibrary(username); 
-                String[] details= getUserDetails(username);      
+                String[] details= UserCSVReader.getUserDetails(username);      
                 
                 
 		return new User(details[0],details[1],details[2],details[3],details[4],library);
