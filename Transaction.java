@@ -13,9 +13,7 @@ public class Transaction{
 		public void UpdateUserLibrary(Transaction trans) throws Exception{
 			String username = user.getName();
 			File originalLibrary = new File("library.csv");
-			File newLibrary = new File("newLibrary.csv");
 			Scanner in = new Scanner(originalLibrary);
-			FileWriter writer = new FileWriter(newLibrary);
 			String updatedLibrary = new String("");
 			
 			while(in.hasNext()){
@@ -24,7 +22,10 @@ public class Transaction{
 				if((username).matches(temp[0])) updatedLibrary = updatedLibrary + currentLine + "," + game + "\n" ;
 				else updatedLibrary = updatedLibrary + currentLine + "\n";
 			}
+			in.close();
 			
+			File newLibrary = new File("library.csv");
+			FileWriter writer = new FileWriter(newLibrary);
 			writer.write(updatedLibrary);
 			writer.flush();
 			writer.close();
