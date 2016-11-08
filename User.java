@@ -7,6 +7,7 @@ public class User{
 	private int spendings;
 	private double balance;
 	private ArrayList<Product> library;
+	private ArrayList<Product> cart;
 	private Rank rank;
 	
 	public User(String username){
@@ -16,15 +17,16 @@ public class User{
 	        this.spendings = 0;
 		this.balance = 0;
 		this.library = new ArrayList<Product>();
+		this.cart = new ArrayList<Product>();
 	}
-        public User(String username, int r, int f,int s, double b){
+        /*public User(String username, int r, int f,int s, double b){
 		this.username = username;
 		this.numReviews = r;
 		this.numFriends = f;
 		this.spendings = s;
 		this.balance = b;
                 this.library = new ArrayList<Product>();
-	}
+	}*/
 	public User(String username, int r, int f,int s, double b,ArrayList<Product> library){
 		this.username = username;
 		this.numReviews = r;
@@ -32,6 +34,7 @@ public class User{
 		this.spendings = s;
 		this.balance = b;
 		this.library = library;
+		this.cart = new ArrayList<Product> cart;
 	}
 	
 		public static User getUser(String username, int r, int f,int s, double b) throws FileNotFoundException{
@@ -44,7 +47,7 @@ public class User{
 	}
 	
 	public static User getUser(String username){
-		//braryCSVReader.getLibrary(username);
+		LibraryCSVReader.getLibrary(username);
 		return new User(username);
 		
 	}
