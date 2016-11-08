@@ -32,6 +32,7 @@ public class Screen extends JFrame implements ActionListener {
         balance = 0;
         //balance = loggedInUser.getBalance();
         cartList = new ArrayList<>();
+        loggedInUser = new User("Null");
         
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,1));
@@ -42,11 +43,12 @@ public class Screen extends JFrame implements ActionListener {
         topPanel.setLayout(new FlowLayout());
         topPanel.setPreferredSize(new Dimension(350,100));
         
+        
         mainPanel = new LoginPanel(database,cartList, loggedInUser);    
         
         login = new JButton("Login");
         store = new JButton("Store");
-        cart = new JButton("Balance: " + balance);
+        cart = new JButton("Cart: " + balance);
         library = new JButton("Libary");
         exit = new JButton("Exit");
         login.setPreferredSize(new Dimension(100,100));
@@ -78,48 +80,43 @@ public class Screen extends JFrame implements ActionListener {
     {
         Object source = event.getSource();
         
-       
-        
-        
         if(source == exit) {
             System.exit(0);
         }
         if(source == store) {
+            cartList = mainPanel.getCart();
+            loggedInUser = mainPanel.getUser();
             sp = new StorePanel(database, cartList, loggedInUser); 
             changePanel(sp);   
         }
         if(source == login) {
+            cartList = mainPanel.getCart();
+            loggedInUser = mainPanel.getUser();
             lp = new LoginPanel(database, cartList, loggedInUser); 
             changePanel(lp);
         }
         if(source == library) { 
+            cartList = mainPanel.getCart();           
+            loggedInUser = mainPanel.getUser();
             Lp = new LibraryPanel(database, cartList, loggedInUser); 
             changePanel(Lp);
         }
         if(source == cart) {
+            cartList = mainPanel.getCart();
+            loggedInUser = mainPanel.getUser();
             cp = new CartPanel(database, cartList, loggedInUser);  
             changePanel(cp);
         }
     }
+    
    public void changePanel(Panel newPanel)
    {
-        System.out.print("Size Before " + cartList.size() + "\n");
-        //cartList = new ArrayList<>();
-        cartList = mainPanel.getCart();
         loggedInUser = mainPanel.getUser();
-        
-        System.out.print("Size after " + cartList.size() + "\n");
         panel.remove(mainPanel);
         mainPanel = newPanel;
         panel.add(mainPanel);
-        test();
         this.repaint();
         this.revalidate(); 
         
-   }
-   public void test()
-   {
-       for (int i =0; i < cartList.size(); i++)
-            System.out.print(cartList.get(i).getTitle());
    }
 }

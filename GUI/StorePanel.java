@@ -16,16 +16,17 @@ public class StorePanel extends Panel implements ActionListener {
     private ArrayList<JButton> buttons;
     private JButton button;
     private JScrollPane scroll;
-    public StorePanel(Database database, ArrayList<Product> cartList, User loggedInUser)
+    public StorePanel(Database database, ArrayList<Product> cart, User loggedInUser)
     {
         this.loggedInUser = loggedInUser;
         panel = new JPanel();
         buttons = new ArrayList<>();
-        productsList = database.giveList();
-        this.cartList = cartList;
+        productsList = database.giveProductList();
+        this.cartList = cart;
         
         for (int i = 0; i < productsList.size();i++)
         {
+            //System.out.println(productsList.get(i).getTitle());
             button = new JButton(productsList.get(i).getTitle());
             button.setPreferredSize(new Dimension(550,100));
             buttons.add(i, button);
@@ -52,13 +53,10 @@ public class StorePanel extends Panel implements ActionListener {
                 if (title.contains("(In Cart)")){
                     title = title.substring(0, title.length() - 9);
                     buttons.get(i).setText(title);
-                    //System.out.print(cartList.size());
                 }
                 else{                
                     buttons.get(i).setText(title + "(In Cart)");
                     cartList.add(productsList.get(i));
-                    System.out.print(cartList.size());
-                    //do cart logic
                 }
                 
             }

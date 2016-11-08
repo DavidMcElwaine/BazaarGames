@@ -9,7 +9,7 @@ public class Panel extends JPanel{
     public User loggedInUser;
     public Panel()
     {
-        loggedInUser = new User();
+        //loggedInUser = new User();
     }
     public void setCart(ArrayList cartList){
         this.cartList = cartList;
