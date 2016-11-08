@@ -3,17 +3,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 public class Transaction{
-        private User user;
+        
+		private User user;
 		private ArrayList<Product> additions;
+		
 		public Transaction(User user, ArrayList<Product> additions)
                 {
                     this.user = user;
-		    this.additions = additions;
+					this.additions = additions;
                 }
+		
+		
 		public void UpdateUserLibrary(Transaction trans) throws Exception{
 			String username = user.getName();
 			File originalLibrary = new File("library.csv");
-			File newLibrary = new File("newLibrary.csv");
+			File newLibrary = new File("library.csv");
 			Scanner in = new Scanner(originalLibrary);
 			FileWriter writer = new FileWriter(newLibrary);
 			String updatedLibrary = new String("");
@@ -21,7 +25,11 @@ public class Transaction{
 			while(in.hasNext()){
 				String currentLine = in.nextLine();
 				String[] temp = currentLine.split(",");
-				if((username).matches(temp[0])) updatedLibrary = updatedLibrary + currentLine + "," + product.title() + "\n" ;
+				if((username).matches(temp[0])){	  
+					updatedLibrary = updatedLibrary + currentLine;
+					for(int i=0; i<(trans.getAdditions()).length();i++) updatedLibrary = updatedLibrary + "," + trans.getAdditions(i).getTitle();
+					updatedLibrary += "\n";
+				}
 				else updatedLibrary = updatedLibrary + currentLine + "\n";
 			}
 			
@@ -70,4 +78,8 @@ public class Transaction{
 
 			return finalCost;
 		}
+	public ArrayList<Product> getAdditions(){
+		return this.additions;
+	}
+	}
 }
