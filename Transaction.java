@@ -13,19 +13,18 @@ public class Transaction{
 		public void UpdateUserLibrary(Transaction trans) throws Exception{
 			String username = user.getName();
 			File originalLibrary = new File("library.csv");
+			File newLibrary = new File("newLibrary.csv");
 			Scanner in = new Scanner(originalLibrary);
+			FileWriter writer = new FileWriter(newLibrary);
 			String updatedLibrary = new String("");
 			
 			while(in.hasNext()){
 				String currentLine = in.nextLine();
 				String[] temp = currentLine.split(",");
-				if((username).matches(temp[0])) updatedLibrary = updatedLibrary + currentLine + "," + game + "\n" ;
+				if((username).matches(temp[0])) updatedLibrary = updatedLibrary + currentLine + "," + product.title() + "\n" ;
 				else updatedLibrary = updatedLibrary + currentLine + "\n";
 			}
-			in.close();
 			
-			File newLibrary = new File("library.csv");
-			FileWriter writer = new FileWriter(newLibrary);
 			writer.write(updatedLibrary);
 			writer.flush();
 			writer.close();
@@ -34,7 +33,7 @@ public class Transaction{
 		public double CalculateBill(User user){
 			
 			Rank rank = new Rank(user);
-			double rankDiscount = rnak.getDiscount();
+			double rankDiscount = rank.getDiscount();
 			
 			String username = user.getName();
 			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -43,19 +42,19 @@ public class Transaction{
 			double discountA = 0;
 			double originalCost = 0;
 			
-			for(Game game: newGames){
+			for(Product product: user.getCart()){
 				
 				//add price to bill
-				originalCost += game.getPrice();
+				originalCost += product.getPrice();
 				
 				//calculate discount based on age of game. 1% per year up to 50% off
-				int ageDifference = currentYear - game.getYear();
+				int ageDifference = currentYear - product.getYear();
 				double ageDiscount = 1 - (ageDifference*0.01);
 				if(ageDiscount < 0.5) ageDiscount = 0.5;
 				
 				//calculate discount based on sales. 1% reduction in discount per 100 sales
 				double modifierB = 0.5;
-				double salesDiscount = modifierB + (0.0001*game.getSales());
+				double salesDiscount = modifierB + (0.0001*product.getSales());
 				
 				//first stage of discount is the average of age and sales discounts
 				discountA = (ageDiscount+salesDiscount)/2;				
