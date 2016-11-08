@@ -8,7 +8,7 @@ public class Transaction{
 		public Transaction(User user, ArrayList<Product> additions)
                 {
                     this.user = user;
-					this.additions = additions;
+		    this.additions = additions;
                 }
 		public void UpdateUserLibrary(Transaction trans) throws Exception{
 			String username = user.getName();
