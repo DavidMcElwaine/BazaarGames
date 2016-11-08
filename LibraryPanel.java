@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class LibraryPanel extends JPanel implements ActionListener {
-    private ArrayList<Game> gamesList;
+    private ArrayList<Product> gamesList;
     final JPanel panel;
     private ArrayList<JButton> buttons;
     private JButton button;
