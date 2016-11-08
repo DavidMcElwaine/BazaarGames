@@ -34,21 +34,15 @@ public class User{
 		this.spendings = s;
 		this.balance = b;
 		this.library = library;
-		this.cart = new ArrayList<Product> cart;
+		this.cart = new ArrayList<>();
 	}
 	
-		public static User getUser(String username, int r, int f,int s, double b) throws FileNotFoundException{
+		public static User getUser(String username) throws FileNotFoundException{
 		ArrayList<Product> library = LibraryCSVReader.getLibrary(username); 
                 String[] details= UserCSVReader.getUserDetails(username);      
                 
                 
-		return new User(details[0],details[1],details[2],details[3],details[4],library);
-		
-	}
-	
-	public static User getUser(String username){
-		LibraryCSVReader.getLibrary(username);
-		return new User(username);
+		return new User(details[0],Integer.parseInt(details[1]),Integer.parseInt(details[2]),Integer.parseInt(details[3]),Double.parseDouble(details[4]),library);
 		
 	}
 	
