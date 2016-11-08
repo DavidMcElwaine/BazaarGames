@@ -16,7 +16,7 @@ public class Rank{
 
 		if(rankpoints > 500)		this.rank = "Gold";
 		else if(rankpoints > 200)	this.rank = "Silver";
-		else 						this.rank = "Bronze";	
+		else 				this.rank = "Bronze";	
 	}
 		
 	public static double getSpendings(User user){
