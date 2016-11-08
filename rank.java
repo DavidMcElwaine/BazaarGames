@@ -1,34 +1,28 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Rank{
 
-	private String username;
-	private int reviews;
-	private int friends;
+	private User user;
 	private String rank;
 	
-	public Rank(String username, int reviews, int friends){
-		double spent = getSpendings(username);
+	public Rank(User user){
+		this.user = user;
+		double spent = getSpendings(user);
 		
-		double rankpoints =  reviews + friends + spent;
-		String rank;
-		if(rankpoints > 500){
-			rank = "Gold";
-		}
-		else if(rankpoints > 200){
-			rank = "Silver";
-		}
-		else rank = "Bronze";
-		
+		double rankpoints =  (5*user.getReviews()) + (2*user.getFriends()) + spent;
+
+		if(rankpoints > 500)		this.rank = "Gold";
+		else if(rankpoints > 200)	this.rank = "Silver";
+		else 						this.rank = "Bronze";	
 	}
 		
-	public static double getSpendings(String username){
+	public static double getSpendings(User user){
 		double total = 0; //open the two files and declare your return int
-		try 
-		{
-			Arraylist<String> library = username.getLibrary();
+		try {
+			Arraylist<String> library = user.getLibrary();
 			
 					for(int i = 0; i < library.size(); i++){
 						Scanner gameDetails = new Scanner(new File("games.txt"));
@@ -36,7 +30,7 @@ public class Rank{
 						{
 							String gLine = gameDetails.nextLine();
 							String[] temp = gLine.split(",");
-							if(temp[0].matches(library.get(i));
+							if(temp[0].matches(library.get(i)));
 							{
 								double price = Double.parseDouble(temp[4]);
 								total = total + price;// adds the cost of each one up
@@ -44,15 +38,11 @@ public class Rank{
 						}
 						gameDetails.close();// closes file after each iteration so that it begins the search from the beginning
 				        }
-				}
-			}
 			library.close();
 		}
-		
 		catch (FileNotFoundException e) {
 			System.out.println("Scanner creation failed in getSpendings()");
 		}
-		
 		return total;
 	}
 }
