@@ -38,23 +38,19 @@ public class Movie{
 		return price;
 	}
 	
-	public double getSales(){
+	public int getSales(){
 		return sales;
 	}
 	
-	public double getYear(){
-		return year;
-	}
-	
-	public double getRuntime(){
+	public int getRuntime(){
 		return runtime;
 	}
 	
-	public double getDirector(){
+	public String getDirector(){
 		return director;
 	}
 	
-	public double getStudio(){
+	public String getStudio(){
 		return studio;
 	}
 	
