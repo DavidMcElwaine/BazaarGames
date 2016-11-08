@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 public class Transaction{
-                private User user;
+        private User user;
 		private ArrayList<Product> additions;
 		public Transaction(User user, ArrayList<Product> additions)
                 {
                     this.user = user;
-		    this.additions = additions;
+					this.additions = additions;
                 }
 		public void UpdateUserLibrary(Transaction trans) throws Exception{
 			String username = user.getName();
@@ -30,7 +30,11 @@ public class Transaction{
 			writer.close();
 		}	
 		
-		public double CalculateBill(ArrayList<Game> newGames){
+		public double CalculateBill(User user){
+			
+			Rank rank = new Rank(user);
+			double rankDiscount = rnak.getDiscount();
+			
 			String username = user.getName();
 			int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 			double discountPercent = 0;
@@ -61,7 +65,7 @@ public class Transaction{
 			if(discountPercent >= 0.15) discountPercent = 0.15;
 			
 			//final bill
-			double finalDiscount = discountPercent + discountA;
+			double finalDiscount = discountPercent + discountA + rankDiscount;
 			double finalCost = originalCost * finalDiscount;	
 
 			return finalCost;
