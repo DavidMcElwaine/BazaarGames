@@ -46,8 +46,10 @@ public class Rank{
 		return total;
 	}
 	
-	public String getRank(){
-		return this.rank;
+	public double getDiscount(){
+		if(this.rank.matches("Gold") return 0.8;
+		else if(this.rank.matches("Silver") return 0.9;
+		else return 1.0;
 	}
 }
 
