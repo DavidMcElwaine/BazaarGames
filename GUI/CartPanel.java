@@ -15,20 +15,19 @@ public class CartPanel extends Panel implements ActionListener {
     private ArrayList<JButton> buttons;
     private JButton button,buy,clear;
     private JScrollPane scroll;
-    public CartPanel(Database database, ArrayList<Product> cartList, User loggedInUser){ 
+    public CartPanel(Database database, ArrayList<Product> cart, User loggedInUser){
         this.loggedInUser = loggedInUser;
         cartList = new ArrayList<>();
-        this.cartList = cartList;
-        System.out.print(cartList.size());
-        
+        this.cartList = cart;
         buttonPanel = new JPanel();
         panel = new JPanel();
         buttons = new ArrayList<>();
         scroll = new JScrollPane(panel);
         buy = new JButton("Buy cart");
         clear = new JButton("Clear cart");
-
+        System.out.println("cartList size =" + cartList.size());
         for (int i = 0; i < cartList.size();i++)  {
+            System.out.println(i);
             button = new JButton(cartList.get(i).getTitle());
             button.setPreferredSize(new Dimension(550,100));
             buttons.add(i, button);
@@ -60,14 +59,20 @@ public class CartPanel extends Panel implements ActionListener {
         }
         if(source == buy)
         {
+            //Transaction transaction = new Transaction(loggedInUser, cartList);
             cartList = new ArrayList<>();
-            //transation class goes here
+            repaint();
             revalidate();
         }
         if(source == clear)
         {
             cartList = new ArrayList<>();
+            repaint();
             revalidate();
         }
+    }
+    public void update()
+    {
+        
     }
 }
