@@ -1,6 +1,5 @@
 public class Admin implements User{
 	private static Admin instance = new Admin();
-	private String username;
 	private int control;
 	
 	private Admin(){
@@ -12,9 +11,6 @@ public class Admin implements User{
 	}
 	public int getControl(){
 		return control;
-	}
-	public String getUserName(){
-		return username;
 	}
 	
 }
