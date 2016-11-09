@@ -1,4 +1,4 @@
-public class Movie implements Product{
+public class Movie extends Product{
 	
 	private int runtime; // in minutes
 	private String director;
@@ -20,6 +20,17 @@ public class Movie implements Product{
 		this.runtime = runtime;
 		this.director = director;
 		this.studio = studio;
+	}
+	
+	public Movie(){
+		this.title = "null";
+		this.price = 0;
+		this.sales = 0;
+		this.year = 0;
+		this.genre = "null";
+		this.runtime = 0;
+		this.director = "null";
+		this.studio = "null";
 	}
 	
 	public int getYear(){
