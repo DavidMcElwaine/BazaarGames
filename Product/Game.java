@@ -1,4 +1,4 @@
-public class Game implements Product{
+public class Game extends Product{
 	
 	private int numberOfPlayers;
 	private String developer;
@@ -20,6 +20,17 @@ public class Game implements Product{
 		this.numberOfPlayers = numberOfPlayers;
 		this.developer = developer;
 		this.onlineSupport = onlineSupport;
+	}
+	
+	public Game(){
+		this.title = "null";
+		this.price = 0;
+		this.sales = 0;
+		this.year = 0;
+		this.genre = "null";
+		this.numberOfPlayers = 0;
+		this.developer = "null";
+		this.onlineSupport = false;
 	}
 	
 	public int getYear(){
