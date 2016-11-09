@@ -11,7 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+//put observer class relating to balance
 
 public class Screen extends JFrame implements ActionListener {
     final JPanel  panel;
@@ -24,15 +24,12 @@ public class Screen extends JFrame implements ActionListener {
     private CartPanel cp;
     private StorePanel sp;
     private LibraryPanel Lp; 
-    private static ArrayList<Product> cartList;
     private User loggedInUser;
     public Screen ()throws IOException
     {
-        database = new Database();        
-        balance = 0;
-        //balance = loggedInUser.getBalance();
-        cartList = new ArrayList<>();
+        database = new Database();    
         loggedInUser = new User("Null");
+        balance = loggedInUser.getBalance();
         
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel,1));
@@ -44,7 +41,7 @@ public class Screen extends JFrame implements ActionListener {
         topPanel.setPreferredSize(new Dimension(350,100));
         
         
-        mainPanel = new LoginPanel(database,cartList, loggedInUser);    
+        mainPanel = new LoginPanel(database, loggedInUser);    
         
         login = new JButton("Login");
         store = new JButton("Store");
@@ -84,27 +81,23 @@ public class Screen extends JFrame implements ActionListener {
             System.exit(0);
         }
         if(source == store) {
-            cartList = mainPanel.getCart();
             loggedInUser = mainPanel.getUser();
-            sp = new StorePanel(database, cartList, loggedInUser); 
+            sp = new StorePanel(database, loggedInUser); 
             changePanel(sp);   
         }
         if(source == login) {
-            cartList = mainPanel.getCart();
             loggedInUser = mainPanel.getUser();
-            lp = new LoginPanel(database, cartList, loggedInUser); 
+            lp = new LoginPanel(database, loggedInUser); 
             changePanel(lp);
         }
-        if(source == library) { 
-            cartList = mainPanel.getCart();           
+        if(source == library) {          
             loggedInUser = mainPanel.getUser();
-            Lp = new LibraryPanel(database, cartList, loggedInUser); 
+            Lp = new LibraryPanel(database, loggedInUser); 
             changePanel(Lp);
         }
         if(source == cart) {
-            cartList = mainPanel.getCart();
             loggedInUser = mainPanel.getUser();
-            cp = new CartPanel(database, cartList, loggedInUser);  
+            cp = new CartPanel(database, loggedInUser);  
             changePanel(cp);
         }
     }
@@ -118,5 +111,11 @@ public class Screen extends JFrame implements ActionListener {
         this.repaint();
         this.revalidate(); 
         
+   }
+   public void test()
+   {
+       System.out.println("Current user is ");
+       System.out.println("Current user is ");
+       System.out.println("Current user is ");
    }
 }

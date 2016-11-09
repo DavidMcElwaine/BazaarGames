@@ -14,10 +14,8 @@ public class LibraryPanel extends Panel implements ActionListener {
     private ArrayList<JButton> buttons;
     private JButton button;
     final JScrollPane scroll;
-    public LibraryPanel(Database database, ArrayList<Product> cart, User loggedInUser){
+    public LibraryPanel(Database database, User loggedInUser){
         this.loggedInUser = loggedInUser;
-        cartList = new ArrayList<>();
-        this.cartList = cart;
         
         libraryList = new ArrayList<>();
         libraryList = loggedInUser.getLibrary();
@@ -38,6 +36,7 @@ public class LibraryPanel extends Panel implements ActionListener {
             panel.add(buttons.get(i));
             buttons.get(i).addActionListener(this);
         }
+        setUser(this.loggedInUser);
     }    
     public void actionPerformed(ActionEvent event)
     {

@@ -18,11 +18,9 @@ public class LoginPanel extends Panel implements ActionListener{
     private String userName;
     ArrayList<User> allUsers;
     Database database;
-    public LoginPanel(Database database, ArrayList<Product> cart, User loggedIn)
+    public LoginPanel(Database database, User loggedIn)
     {
         this.loggedInUser = loggedIn;
-        cartList = new ArrayList<>();
-        this.cartList = cart;
         this.database = database;
         
         name = new JTextField();
@@ -60,11 +58,13 @@ public class LoginPanel extends Panel implements ActionListener{
             boolean found = false;
             for (int i =0 ; i < allUsers.size() && !found;i++)
             {
+                System.out.print(allUsers.get(i).getName());
                 if (userName.matches(allUsers.get(i).getName()))
                 {
-                    User copy = allUsers.get(i);
-                    //loggedInUser = getUser(copy.getName(),copy.)
+                    loggedInUser = allUsers.get(i);
+                    System.out.println("User = " + loggedInUser.getName());
                     found = true;
+                    JOptionPane.showMessageDialog(null,"Logged in to " + userName + " account");
                 }
             }
             if (found == false)
@@ -73,14 +73,20 @@ public class LoginPanel extends Panel implements ActionListener{
         if (source == createButton)
         {
             userName = name.getText();
-            loggedInUser = new User (userName);
-            try {
-                database.addUser(loggedInUser);
-            } catch (IOException ex) {
-                Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.printf("Error");
+            if (userName.length() > 0){
+                loggedInUser = new User (userName);
+                try {
+                    database.addUser(loggedInUser);
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.printf("Error");
+                }
+            }
+            else {
+               JOptionPane.showMessageDialog(null,"Please enter a name"); 
             }
         }
+        setUser(this.loggedInUser);
     }
     public String getUserName()
     {
