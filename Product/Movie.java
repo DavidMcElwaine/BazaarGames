@@ -1,4 +1,4 @@
-public class Movie{
+public class Movie implements Product{
 	
 	private int runtime; // in minutes
 	private String director;
@@ -55,5 +55,6 @@ public class Movie{
 	}
 	
 	public void buy(){
+		System.out.println("Movie purchased");
 	}
 }
