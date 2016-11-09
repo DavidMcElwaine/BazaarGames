@@ -1,10 +1,30 @@
-public interface Product{
+package bazaar;
 
-	public void buy();
+public abstract class Product{
+        private String title;
+	private double price;
+	private int sales;
+	private int year;
+	private String genre;
+	public void buy(){}
 	
-	public String getTitle();
-	public double getPrice();
-	public int getSales();
-	public int getYear();
-	public String getGenre();
+	public int getYear(){
+		return year;
+	}
+	
+	public String getTitle(){
+		return title;
+	}
+	
+	public String getGenre(){
+		return genre;
+	}
+	
+	public double getPrice(){
+		return price;
+	}
+	
+	public int getSales(){
+		return sales;
+	}
 }
