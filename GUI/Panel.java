@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 
-public class Panel extends JPanel{
+public abstract class Panel extends JPanel{
     public ArrayList <Product> cartList;
     public User loggedInUser;
     public Panel()
