@@ -1,4 +1,5 @@
-public class ProductFactory{
+public abstract class ProductFactory{
+	
 	public static Product getProduct(String type){
 		if(type.equals("Game")) return new Game();
 		else if(type.equals("Movie")) return new Movie();
