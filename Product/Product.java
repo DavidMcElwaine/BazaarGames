@@ -1,6 +1,6 @@
 public interface Product{
 
-	public void buy(String username, String title);
+	public void buy();
 	
 	public String getTitle();
 	public double getPrice();
