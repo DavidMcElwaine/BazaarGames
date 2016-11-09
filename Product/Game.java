@@ -38,7 +38,7 @@ public class Game implements Product{
 		return price;
 	}
 	
-	public double getSales(){
+	public int getSales(){
 		return sales;
 	}
 	
@@ -54,6 +54,7 @@ public class Game implements Product{
 		return onlineSupport;
 	}
 	
-	public void buy(String username, String title){
+	public void buy(){
+		System.out.println("Game bought");
 	}
 }
