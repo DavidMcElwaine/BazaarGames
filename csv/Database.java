@@ -1,10 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package bazaar;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +15,6 @@ public class Database {
         allProducts = new ArrayList<Product>();
         allUsers = new ArrayList<User>();
         readGames();
-        readUsers();
     }
     public void readGames() throws IOException
     {
@@ -44,28 +36,6 @@ public class Database {
         }
         else {
             System.out.print("No games.txt file");
-        }
-    }
-    public void readUsers() throws IOException
-    {
-        User user;
-        File file = new File("users.txt");
-        if (file.exists()){
-            in = new Scanner(file);
-            System.out.println("user.txt Found");
-            String line;
-            String lineElements[];
-            while(in.hasNext()){
-                line = in.nextLine();
-                System.out.println(line);
-                lineElements = line.split(",");
-                user = new User(lineElements[0],Integer.parseInt(lineElements[1]),Integer.parseInt(lineElements[2]),Integer.parseInt(lineElements[3]),Double.parseDouble(lineElements[4]));
-                allUsers.add(user);
-            }
-            in.close();
-        }
-        else {
-            System.out.print("No users.txt file");
         }
     }
     public ArrayList <Product> giveProductList()
@@ -92,4 +62,6 @@ public class Database {
         
     }
 }
+
+
 
