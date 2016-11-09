@@ -1,5 +1,7 @@
 public class ProductFactory{
-	public static Product getProduct(){ //update to take an argument to determine type
-	return new Game();//update to create movies when needed
+	public static Product getProduct(String type){
+		if(type.equals("Game")) return new Game();
+		else if(type.equals("Movie")) return new Movie();
+		else return null;
 	}
 }
