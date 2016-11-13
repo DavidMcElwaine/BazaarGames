@@ -1,17 +1,14 @@
+package bazaar;
+
 import java.io.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserCSVWriter {
-	
-	public static void main(String[] args) throws Exception{
-		Buy("gameGuy99", 50);
-	}
-	
+public class UserCSVWriter {	
   public static void Buy(String username, double price) throws FileNotFoundException, Exception{
   
-  Scanner  details = new Scanner(new File("user.csv"));
+  Scanner  details = new Scanner(new File("users.csv"));
   String updatedUsers = new String("");
                 
    while(details.hasNext()){
@@ -34,9 +31,25 @@ public class UserCSVWriter {
 		  updatedUsers += currentLine + " \n";
    }
    details.close();
-   FileWriter newDetails = new FileWriter(new File("user.csv"));
+   FileWriter newDetails = new FileWriter(new File("users.csv"));
    newDetails.write(updatedUsers);
    
    newDetails.close();     
+  }
+  public static void newUser(String userName)throws IOException{
+      Scanner  in = new Scanner(new File("user.csv"));
+      ArrayList <String> lines= new ArrayList<>();
+     while(in.hasNext()){
+        String line = in.nextLine();
+        lines.add(line);
+     }
+     in.close();
+     
+     PrintWriter out = new PrintWriter(new File("user.csv"));
+     for (int i =0; i < lines.size();i++)
+         out.println(lines.get(i));
+     out.print(userName + ",");
+
+     out.close();    
   }
 }
