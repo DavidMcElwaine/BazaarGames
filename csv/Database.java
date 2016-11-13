@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bazaar;
 
 import java.io.File;
@@ -15,7 +10,7 @@ import java.util.Scanner;
 public class Database {
     private ArrayList<Product> allProducts;
     private ArrayList<User> allUsers;
-    //private Scanner in;   
+    private Scanner in;   
     public Database()throws IOException
     {
         allProducts = new ArrayList<Product>();
@@ -26,7 +21,6 @@ public class Database {
     public void readGames() throws IOException
     {
         Game game;
-        Scanner in;
         File file = new File("games.txt");
         if (file.exists()){
             in = new Scanner(file);
@@ -48,17 +42,15 @@ public class Database {
     }
     public void readUsers() throws IOException
     {
-        User user;Scanner in;
+        User user;
         File file = new File("users.txt");
         if (file.exists()){
             in = new Scanner(file);
             String line;
             String lineElements[];
-            System.out.println("Reading in Users");
             while(in.hasNext())
             {
                 line = in.nextLine();
-                System.out.println(line);
                 lineElements = line.split(",");
                 user = new User(lineElements[0],Integer.parseInt(lineElements[1]),Integer.parseInt(lineElements[2]),
                         Integer.parseInt(lineElements[3]),Double.parseDouble(lineElements[4]));
@@ -84,10 +76,8 @@ public class Database {
         String line;
         ArrayList <String> lines = new ArrayList<>();
        
-        if (file.exists()){
-            System.out.println("Users found");
-            
-            Scanner in = new Scanner(file);
+        if (file.exists()){            
+            in = new Scanner(file);
             while(in.hasNext())
             {
                 line = in.next();
