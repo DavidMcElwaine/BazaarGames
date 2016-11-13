@@ -1,3 +1,5 @@
+package bazaar;
+
 public class Game extends Product{
 	
 	private int numberOfPlayers;
@@ -11,7 +13,6 @@ public class Game extends Product{
 	private String genre;
 	
 	public Game(String title, double price, int sales, int year, String genre, int numberOfPlayers, String developer, boolean onlineSupport){
-		
 		this.title = title;
 		this.price = price;
 		this.sales = sales;
@@ -20,17 +21,6 @@ public class Game extends Product{
 		this.numberOfPlayers = numberOfPlayers;
 		this.developer = developer;
 		this.onlineSupport = onlineSupport;
-	}
-	
-	public Game(){
-		this.title = "null";
-		this.price = 0;
-		this.sales = 0;
-		this.year = 0;
-		this.genre = "null";
-		this.numberOfPlayers = 0;
-		this.developer = "null";
-		this.onlineSupport = false;
 	}
 	
 	public int getYear(){
