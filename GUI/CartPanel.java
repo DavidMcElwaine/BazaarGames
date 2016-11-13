@@ -4,30 +4,36 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class CartPanel extends Panel implements ActionListener {
-    final JPanel panel,buttonPanel;
+    private JPanel panel,buttonPanel;
     private ArrayList<JButton> buttons;
     private JButton button,buy,clear;
     private JScrollPane scroll;
+    private Observer observer;
     public CartPanel(Database database, User lUser){
         this.loggedInUser = lUser;
-        System.out.println("User name is " + loggedInUser.getName());
+        setUp();
+        setUser(this.loggedInUser);
+    }
+    public void setUp()
+    {
         buttonPanel = new JPanel();
         panel = new JPanel();
         buttons = new ArrayList<>();
         scroll = new JScrollPane(panel);
         buy = new JButton("Buy cart");
         clear = new JButton("Clear cart");
-        ArrayList cart = loggedInUser.getCart();
-        System.out.println("cartList size =" + cart.size());
-        for (int i = 0; i < loggedInUser.getCart().size();i++)  {
-            System.out.println(i);
-            button = new JButton(loggedInUser.getCart().get(i).getTitle());
+        
+        ArrayList <Product> cart = loggedInUser.getCart();
+        for (int i = 0; i < cart.size();i++)  {
+            button = new JButton(cart.get(i).getTitle());
             button.setPreferredSize(new Dimension(550,100));
             buttons.add(i, button);
         }    
@@ -47,10 +53,7 @@ public class CartPanel extends Panel implements ActionListener {
         buy.addActionListener(this);
         clear.addActionListener(this);
         this.add(buttonPanel);
-        setUser(this.loggedInUser);
     }
-    
-    //Make it clear up properly.
     public void actionPerformed(ActionEvent event)
     {
         Object source = event.getSource();
@@ -61,13 +64,22 @@ public class CartPanel extends Panel implements ActionListener {
         }
         if(source == buy)
         {
+            for (int i =0; i < loggedInUser.getCart().size();i++)
+                panel.remove(buttons.get(i));
             Transaction transaction = new Transaction(loggedInUser);
-            transaction.CalculateBill(loggedInUser);
-            
+            transaction.CalculateBill(loggedInUser); 
+            for (int i =0; i < loggedInUser.getCart().size(); i++){
+                try {
+                    UserCSVWriter.Buy(loggedInUser.getName(), loggedInUser.getCart().get(i).getPrice());
+                } catch (Exception ex) {
+                    Logger.getLogger(CartPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             loggedInUser.emptyCart();
             buttons = new ArrayList<>();
-            repaint();
             revalidate();
+            repaint();
+            
         }
         if(source == clear)
         {
@@ -76,9 +88,5 @@ public class CartPanel extends Panel implements ActionListener {
             repaint();
             revalidate();
         }
-    }
-    public void update()
-    {
-        
     }
 }

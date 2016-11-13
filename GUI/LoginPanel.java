@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class LoginPanel extends Panel implements ActionListener{
-    final JTextField name,password;
-    final JButton loginButton, createButton;
+    private JTextField name,password;
+    private JButton loginButton, createButton;
     private String userName;
     ArrayList<User> allUsers;
     Database database;
@@ -22,18 +22,20 @@ public class LoginPanel extends Panel implements ActionListener{
     {
         this.loggedInUser = loggedIn;
         this.database = database;
-        
+        allUsers = database.giveUserList(); 
+        setUp();
+        setUser(this.loggedInUser);
+    }
+    public void setUp()
+    {
         name = new JTextField();
         password = new JTextField();
         loginButton = new JButton();
         createButton = new JButton();
-        allUsers = database.giveUserList();
         
-        System.out.println("Starting userList");
-        for (int i =0; i < allUsers.size(); i ++)
-            System.out.println(i + "" + allUsers.get(i).getName());
         name.setPreferredSize(new Dimension (100,80));
         password.setPreferredSize(new Dimension (100,80));
+        
         loginButton.addActionListener(this);
         loginButton.setPreferredSize(new Dimension (100,80));
         loginButton.setText("Login to Account");
@@ -47,7 +49,6 @@ public class LoginPanel extends Panel implements ActionListener{
         this.add(password);
         this.add(loginButton);
         this.add(createButton);
-        
     }
      public void actionPerformed(ActionEvent event)
     {
@@ -58,11 +59,9 @@ public class LoginPanel extends Panel implements ActionListener{
             boolean found = false;
             for (int i =0 ; i < allUsers.size() && !found;i++)
             {
-                System.out.print(allUsers.get(i).getName());
                 if (userName.matches(allUsers.get(i).getName()))
                 {
                     loggedInUser = allUsers.get(i);
-                    System.out.println("User = " + loggedInUser.getName());
                     found = true;
                     JOptionPane.showMessageDialog(null,"Logged in to " + userName + " account");
                 }
@@ -77,6 +76,7 @@ public class LoginPanel extends Panel implements ActionListener{
                 loggedInUser = new User (userName);
                 try {
                     database.addUser(loggedInUser);
+                    UserCSVWriter.newUser(loggedInUser.getName());
                 } catch (IOException ex) {
                     Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.printf("Error");

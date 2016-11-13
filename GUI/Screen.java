@@ -5,15 +5,18 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 //put observer class relating to balance
 
-public class Screen extends JFrame implements ActionListener {
+public class Screen extends JFrame implements ActionListener, Observer {
     final JPanel  panel;
     final JPanel topPanel;
     private Panel mainPanel;
@@ -39,8 +42,7 @@ public class Screen extends JFrame implements ActionListener {
         topPanel = new JPanel();
         topPanel.setLayout(new FlowLayout());
         topPanel.setPreferredSize(new Dimension(350,100));
-        
-        
+                
         mainPanel = new LoginPanel(database, loggedInUser);    
         
         login = new JButton("Login");
@@ -83,6 +85,7 @@ public class Screen extends JFrame implements ActionListener {
         if(source == store) {
             loggedInUser = mainPanel.getUser();
             sp = new StorePanel(database, loggedInUser); 
+            sp.makeObserver(this);
             changePanel(sp);   
         }
         if(source == login) {
@@ -92,7 +95,11 @@ public class Screen extends JFrame implements ActionListener {
         }
         if(source == library) {          
             loggedInUser = mainPanel.getUser();
-            Lp = new LibraryPanel(database, loggedInUser); 
+            try { 
+                Lp = new LibraryPanel(database, loggedInUser);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Screen.class.getName()).log(Level.SEVERE, null, ex);
+            }
             changePanel(Lp);
         }
         if(source == cart) {
@@ -101,7 +108,6 @@ public class Screen extends JFrame implements ActionListener {
             changePanel(cp);
         }
     }
-    
    public void changePanel(Panel newPanel)
    {
         loggedInUser = mainPanel.getUser();
@@ -112,10 +118,9 @@ public class Screen extends JFrame implements ActionListener {
         this.revalidate(); 
         
    }
-   public void test()
-   {
-       System.out.println("Current user is ");
-       System.out.println("Current user is ");
-       System.out.println("Current user is ");
-   }
+    @Override
+    public void update(double change ) {
+        balance = balance + change;
+        cart.setText("cart = " + balance);
+    }
 }

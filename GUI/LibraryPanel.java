@@ -3,25 +3,31 @@ package bazaar;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class LibraryPanel extends Panel implements ActionListener {
     private ArrayList<Product> libraryList;
-    final JPanel panel;
+    private JPanel panel;
     private ArrayList<JButton> buttons;
     private JButton button;
-    final JScrollPane scroll;
-    public LibraryPanel(Database database, User loggedInUser){
+    private JScrollPane scroll;
+    public LibraryPanel(Database database, User loggedInUser) throws FileNotFoundException{
         this.loggedInUser = loggedInUser;
-        
         libraryList = new ArrayList<>();
-        libraryList = loggedInUser.getLibrary();
-        
+        libraryList = UserCSVReader.getUserLibrary(loggedInUser.getName());
+        setUp();        
+        setUser(this.loggedInUser);
+    }    
+    public void setUp()
+    {
         buttons = new ArrayList<>();
         for (int i = 0; i < libraryList.size();i++)  {
+            //System.out.println(libraryList.get(i).getTitle());
             button = new JButton(libraryList.get(i).getTitle());
             button.setPreferredSize(new Dimension(550,100));
             buttons.add(i, button);
@@ -36,8 +42,7 @@ public class LibraryPanel extends Panel implements ActionListener {
             panel.add(buttons.get(i));
             buttons.get(i).addActionListener(this);
         }
-        setUser(this.loggedInUser);
-    }    
+    }
     public void actionPerformed(ActionEvent event)
     {
         Object source = event.getSource();
@@ -47,8 +52,7 @@ public class LibraryPanel extends Panel implements ActionListener {
         for (int i =0; i < buttons.size();i++)
         {
             if(source == buttons.get(i))
-                //System.out.println(i);
-                ;
+                JOptionPane.showMessageDialog(null,"");
         }
     }
 }

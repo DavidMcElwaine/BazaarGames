@@ -9,11 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class StorePanel extends Panel implements ActionListener {
+public class StorePanel extends Panel implements ActionListener,Subject {
     private ArrayList<Product> productsList;
     private User loggedInUser;
     final JPanel panel;
     private ArrayList<JButton> buttons;
+    private Observer observer;
     private JButton button;
     private JScrollPane scroll;
     public StorePanel(Database database, User loggedInUser)
@@ -52,13 +53,25 @@ public class StorePanel extends Panel implements ActionListener {
                 if (title.contains("(In Cart)")){
                     title = title.substring(0, title.length() - 9);
                     buttons.get(i).setText(title);
+                    updateObserver(productsList.get(i).getPrice() * -1);
                 }
                 else{                
                     buttons.get(i).setText(title + "(In Cart)");
                     loggedInUser.addToCart(productsList.get(i));
+                    updateObserver(productsList.get(i).getPrice());
                 }
                 
             }
         }
+    }
+
+    @Override
+    public void makeObserver(Observer o) {
+        observer = o;
+    }
+
+    @Override
+    public void updateObserver(double change) {
+        observer.update(change);
     }
 }
