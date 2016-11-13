@@ -1,16 +1,17 @@
+package bazaar;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 public class Transaction{
         
 		private User user;
-		private ArrayList<Product> additions;
 		
-		public Transaction(User user, ArrayList<Product> additions)
+		public Transaction(User user)
                 {
                     this.user = user;
-					this.additions = additions;
                 }
 		
 		
@@ -27,7 +28,8 @@ public class Transaction{
 				String[] temp = currentLine.split(",");
 				if((username).matches(temp[0])){	  
 					updatedLibrary = updatedLibrary + currentLine;
-					for(int i=0; i<(trans.getAdditions()).length();i++) updatedLibrary = updatedLibrary + "," + trans.getAdditions(i).getTitle();
+					for(int i=0; i<(user.getCart().size());i++)
+                                            updatedLibrary = updatedLibrary + "," + user.getCart().get(i).getTitle();
 					updatedLibrary += "\n";
 				}
 				else updatedLibrary = updatedLibrary + currentLine + "\n";
@@ -69,17 +71,14 @@ public class Transaction{
 			}
 			
 			//add discount based on number of games this purchase
-			discountPercent += 0.01*(newGames.size());
+			discountPercent += 0.01*(user.getCart().size());
 			if(discountPercent >= 0.15) discountPercent = 0.15;
 			
 			//final bill
 			double finalDiscount = discountPercent + discountA + rankDiscount;
 			double finalCost = originalCost * finalDiscount;	
-
+                        JOptionPane.showMessageDialog(null, "Total cost of purchase €" + finalCost);
 			return finalCost;
 		}
-	public ArrayList<Product> getAdditions(){
-		return this.additions;
-	}
-	}
+
 }
