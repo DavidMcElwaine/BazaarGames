@@ -4,7 +4,10 @@ package bazaar;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,12 +20,17 @@ public class StorePanel extends Panel implements ActionListener,Subject {
     private Observer observer;
     private JButton button;
     private JScrollPane scroll;
-    public StorePanel(Database database, User loggedInUser)
+    public StorePanel(User loggedInUser)
     {
         this.loggedInUser = loggedInUser;
         panel = new JPanel();
         buttons = new ArrayList<>();
-        productsList = database.giveProductList();
+        
+        try {
+            productsList = StoreCSVReader.getAll();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(StorePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         for (int i = 0; i < productsList.size();i++)
         {

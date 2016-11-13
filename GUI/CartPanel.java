@@ -3,6 +3,7 @@ package bazaar;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,13 +12,13 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class CartPanel extends Panel implements ActionListener {
+public class CartPanel extends Panel implements ActionListener, Subject {
     private JPanel panel,buttonPanel;
     private ArrayList<JButton> buttons;
     private JButton button,buy,clear;
     private JScrollPane scroll;
     private Observer observer;
-    public CartPanel(Database database, User lUser){
+    public CartPanel( User lUser){
         this.loggedInUser = lUser;
         setUp();
         setUser(this.loggedInUser);
@@ -66,8 +67,14 @@ public class CartPanel extends Panel implements ActionListener {
         {
             for (int i =0; i < loggedInUser.getCart().size();i++)
                 panel.remove(buttons.get(i));
+            updateObserver(loggedInUser.getCartCost() * -1);
             Transaction transaction = new Transaction(loggedInUser);
             transaction.CalculateBill(loggedInUser); 
+            try {
+                LibraryCSVWriter.addToLibrary(loggedInUser.getName(), loggedInUser.getCart());
+            } catch (IOException ex) {
+                Logger.getLogger(CartPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
             for (int i =0; i < loggedInUser.getCart().size(); i++){
                 try {
                     UserCSVWriter.Buy(loggedInUser.getName(), loggedInUser.getCart().get(i).getPrice());
@@ -82,11 +89,22 @@ public class CartPanel extends Panel implements ActionListener {
             
         }
         if(source == clear)
-        {
+        {   
+            updateObserver(loggedInUser.getCartCost() * -1);
             loggedInUser.emptyCart();
             buttons = new ArrayList<>();
             repaint();
             revalidate();
         }
+    }
+
+    @Override
+    public void makeObserver(Observer o) {
+        observer = o;
+    }
+
+    @Override
+    public void updateObserver(double change) {
+        observer.update(change);
     }
 }

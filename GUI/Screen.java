@@ -22,15 +22,13 @@ public class Screen extends JFrame implements ActionListener, Observer {
     private Panel mainPanel;
     final JButton store,login,exit,library, cart;
     private double balance;
-    public Database database;
     private LoginPanel lp;
     private CartPanel cp;
     private StorePanel sp;
     private LibraryPanel Lp; 
     private User loggedInUser;
     public Screen ()throws IOException
-    {
-        database = new Database();    
+    {   
         loggedInUser = new User("Null");
         balance = loggedInUser.getBalance();
         
@@ -43,7 +41,7 @@ public class Screen extends JFrame implements ActionListener, Observer {
         topPanel.setLayout(new FlowLayout());
         topPanel.setPreferredSize(new Dimension(350,100));
                 
-        mainPanel = new LoginPanel(database, loggedInUser);    
+        mainPanel = new LoginPanel(loggedInUser);    
         
         login = new JButton("Login");
         store = new JButton("Store");
@@ -84,19 +82,19 @@ public class Screen extends JFrame implements ActionListener, Observer {
         }
         if(source == store) {
             loggedInUser = mainPanel.getUser();
-            sp = new StorePanel(database, loggedInUser); 
+            sp = new StorePanel(loggedInUser); 
             sp.makeObserver(this);
             changePanel(sp);   
         }
         if(source == login) {
             loggedInUser = mainPanel.getUser();
-            lp = new LoginPanel(database, loggedInUser); 
+            lp = new LoginPanel(loggedInUser); 
             changePanel(lp);
         }
         if(source == library) {          
             loggedInUser = mainPanel.getUser();
             try { 
-                Lp = new LibraryPanel(database, loggedInUser);
+                Lp = new LibraryPanel(loggedInUser);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Screen.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -104,7 +102,8 @@ public class Screen extends JFrame implements ActionListener, Observer {
         }
         if(source == cart) {
             loggedInUser = mainPanel.getUser();
-            cp = new CartPanel(database, loggedInUser);  
+            cp = new CartPanel(loggedInUser); 
+            cp.makeObserver(this);
             changePanel(cp);
         }
     }

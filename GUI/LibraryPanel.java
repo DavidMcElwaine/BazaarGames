@@ -16,10 +16,12 @@ public class LibraryPanel extends Panel implements ActionListener {
     private ArrayList<JButton> buttons;
     private JButton button;
     private JScrollPane scroll;
-    public LibraryPanel(Database database, User loggedInUser) throws FileNotFoundException{
+    public LibraryPanel(User loggedInUser) throws FileNotFoundException{
         this.loggedInUser = loggedInUser;
         libraryList = new ArrayList<>();
         libraryList = UserCSVReader.getUserLibrary(loggedInUser.getName());
+        for (int i =0; i < libraryList.size();i++)
+            System.out.println(libraryList.get(i).getTitle());
         setUp();        
         setUser(this.loggedInUser);
     }    
@@ -27,7 +29,6 @@ public class LibraryPanel extends Panel implements ActionListener {
     {
         buttons = new ArrayList<>();
         for (int i = 0; i < libraryList.size();i++)  {
-            //System.out.println(libraryList.get(i).getTitle());
             button = new JButton(libraryList.get(i).getTitle());
             button.setPreferredSize(new Dimension(550,100));
             buttons.add(i, button);

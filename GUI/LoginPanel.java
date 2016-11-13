@@ -17,12 +17,14 @@ public class LoginPanel extends Panel implements ActionListener{
     private JButton loginButton, createButton;
     private String userName;
     ArrayList<User> allUsers;
-    Database database;
-    public LoginPanel(Database database, User loggedIn)
+    public LoginPanel(User loggedIn) 
     {
         this.loggedInUser = loggedIn;
-        this.database = database;
-        allUsers = database.giveUserList(); 
+        try {
+            allUsers = UserCSVReader.getAll();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
         setUp();
         setUser(this.loggedInUser);
     }
@@ -75,7 +77,6 @@ public class LoginPanel extends Panel implements ActionListener{
             if (userName.length() > 0){
                 loggedInUser = new User (userName);
                 try {
-                    database.addUser(loggedInUser);
                     UserCSVWriter.newUser(loggedInUser.getName());
                 } catch (IOException ex) {
                     Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
