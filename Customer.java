@@ -1,6 +1,8 @@
+package bazaar;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-public class Customer implements User{
+public class Customer extends User{
 	private String username;
 	private int numReviews;
 	private int numFriends;
@@ -19,6 +21,15 @@ public class Customer implements User{
 		this.library = new ArrayList<Product>();
 		this.cart = new ArrayList<Product>();
 	}
+        public Customer(String username, int r, int f,int s, double b){
+		this.username = username;
+		this.numReviews = r;
+		this.numFriends = f;
+		this.spendings = s;
+		this.balance = b;
+		this.library = new ArrayList<>();
+		this.cart = new ArrayList<>();
+	}
 	public Customer(String username, int r, int f,int s, double b,ArrayList<Product> library){
 		this.username = username;
 		this.numReviews = r;
@@ -32,14 +43,13 @@ public class Customer implements User{
     public static Customer getUser(String username) throws FileNotFoundException{
 		ArrayList<Product> library = LibraryCSVReader.getLibrary(username); 
         String[] details= UserCSVReader.getUserDetails(username);      
-        return new User(details[0],Integer.parseInt(details[1]),Integer.parseInt(details[2]),Integer.parseInt(details[3]),Double.parseDouble(details[4]),library);
+        return new Customer(details[0],Integer.parseInt(details[1]),Integer.parseInt(details[2]),Integer.parseInt(details[3]),Double.parseDouble(details[4]),library);
 		
 	}
 	
 	ArrayList<Product> getLibrary(){
 		return library;
 	}
-	
 	
 	String getUserName(){
 		return username;
@@ -63,4 +73,21 @@ public class Customer implements User{
 	ArrayList<Product> getCart(){
 		return cart;
 	}
-}
+        double getCartCost()
+        {
+            double cost = 0;
+            for (int i =0; i < cart.size();i++)
+                cost+= cart.get(i).getPrice();
+            return cost;
+        }
+        
+        void addToCart (Product product)
+        {
+            cart.add(product);
+        }
+        
+        void emptyCart()
+        {
+            cart = new ArrayList<>();
+        }
+} 
