@@ -18,7 +18,7 @@ public class CartPanel extends Panel implements ActionListener, Subject {
     private JButton button,buy,clear;
     private JScrollPane scroll;
     private Observer observer;
-    public CartPanel( User lUser){
+    public CartPanel(Customer lUser){
         this.loggedInUser = lUser;
         setUp();
         setUser(this.loggedInUser);
@@ -71,13 +71,13 @@ public class CartPanel extends Panel implements ActionListener, Subject {
             Transaction transaction = new Transaction(loggedInUser);
             transaction.CalculateBill(loggedInUser); 
             try {
-                LibraryCSVWriter.addToLibrary(loggedInUser.getName(), loggedInUser.getCart());
+                LibraryCSVWriter.addToLibrary(loggedInUser.getUserName(), loggedInUser.getCart());
             } catch (IOException ex) {
                 Logger.getLogger(CartPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
             for (int i =0; i < loggedInUser.getCart().size(); i++){
                 try {
-                    UserCSVWriter.Buy(loggedInUser.getName(), loggedInUser.getCart().get(i).getPrice());
+                    UserCSVWriter.Buy(loggedInUser.getUserName(), loggedInUser.getCart().get(i).getPrice());
                 } catch (Exception ex) {
                     Logger.getLogger(CartPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }

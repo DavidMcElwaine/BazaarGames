@@ -14,13 +14,13 @@ import javax.swing.JScrollPane;
 
 public class StorePanel extends Panel implements ActionListener,Subject {
     private ArrayList<Product> productsList;
-    private User loggedInUser;
+    private Customer loggedInUser;
     final JPanel panel;
     private ArrayList<JButton> buttons;
     private Observer observer;
     private JButton button;
     private JScrollPane scroll;
-    public StorePanel(User loggedInUser)
+    public StorePanel(Customer loggedInUser)
     {
         this.loggedInUser = loggedInUser;
         panel = new JPanel();

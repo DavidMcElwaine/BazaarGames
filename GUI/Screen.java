@@ -26,10 +26,10 @@ public class Screen extends JFrame implements ActionListener, Observer {
     private CartPanel cp;
     private StorePanel sp;
     private LibraryPanel Lp; 
-    private User loggedInUser;
+    private Customer loggedInUser;
     public Screen ()throws IOException
     {   
-        loggedInUser = new User("Null");
+        loggedInUser = new Customer("Null");
         balance = loggedInUser.getBalance();
         
         panel = new JPanel();

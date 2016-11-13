@@ -16,8 +16,8 @@ public class LoginPanel extends Panel implements ActionListener{
     private JTextField name,password;
     private JButton loginButton, createButton;
     private String userName;
-    ArrayList<User> allUsers;
-    public LoginPanel(User loggedIn) 
+    ArrayList<Customer> allUsers;
+    public LoginPanel(Customer loggedIn) 
     {
         this.loggedInUser = loggedIn;
         try {
@@ -59,9 +59,10 @@ public class LoginPanel extends Panel implements ActionListener{
         {
             userName = name.getText();           
             boolean found = false;
+            System.out.println(allUsers.size());
             for (int i =0 ; i < allUsers.size() && !found;i++)
             {
-                if (userName.matches(allUsers.get(i).getName()))
+                if (userName.matches(allUsers.get(i).getUserName()))
                 {
                     loggedInUser = allUsers.get(i);
                     found = true;
@@ -75,9 +76,9 @@ public class LoginPanel extends Panel implements ActionListener{
         {
             userName = name.getText();
             if (userName.length() > 0){
-                loggedInUser = new User (userName);
+                loggedInUser = new Customer (userName);
                 try {
-                    UserCSVWriter.newUser(loggedInUser.getName());
+                    UserCSVWriter.newUser(loggedInUser.getUserName());
                 } catch (IOException ex) {
                     Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.printf("Error");

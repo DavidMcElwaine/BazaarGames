@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 public abstract class Panel extends JPanel{
-    public User loggedInUser;
+    public Customer loggedInUser;
     public Panel()
     {
         
     }
     
-    public User getUser()
+    public Customer getUser()
     {
         return loggedInUser;
     }
-    public void setUser(User loggedInUser){
+    public void setUser(Customer loggedInUser){
         this.loggedInUser = loggedInUser;
     }    
 }
